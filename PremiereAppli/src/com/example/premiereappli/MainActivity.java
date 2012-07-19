@@ -24,7 +24,9 @@ public class MainActivity extends Activity
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		
+		((TextView) findViewById(R.id.textView2)).setText("Quelle est votre mise totale?");
+		
 		buttonRecupNombre = (Button) findViewById(R.id.button1);
 		textRecupNombre = (EditText) findViewById(R.id.editText1);
 
@@ -32,17 +34,21 @@ public class MainActivity extends Activity
 		buttonRecupNombre.setOnClickListener(new OnClickListener()
 		{
 
-			@Override
 			public void onClick(View v)
 			{
 				chaine = textRecupNombre.getText().toString();
 				nombre = Integer.parseInt(chaine);
 
-				// on affiche le nombre dans une petite pop-up qui s'affiche quelques seconde en bas d'Žcran
+				// on affiche le nombre dans une petite pop-up qui s'affiche quelques secondes en bas d'ecran
 				Toast.makeText(MainActivity.this, "Le nombre = " + chaine + " !", Toast.LENGTH_LONG).show();
 
 				// affichage du nombre dans notre textView
-				((TextView) findViewById(R.id.textView1)).setText("Le nombre = " + chaine + " !");
+				if (nombre < 1000){
+					((TextView) findViewById(R.id.textView1)).setText("Mais tu est pauvre! Tu n'as que " + chaine + " euros !");
+				}
+				else {
+					((TextView) findViewById(R.id.textView1)).setText("Tu iras loins! Mais essaie de ne pas perdre tes " + chaine + " euros !");
+				}
 			}
 
 		});
