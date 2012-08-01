@@ -13,10 +13,10 @@ import android.widget.Toast;
 public class MainActivity extends Activity
 {
 
-	private Button buttonRecupNombre;
-	private EditText textRecupNombre;
-	private String chaine;
-	private Integer nombre;
+	private Button buttonRecupNombre = null;
+	private EditText textRecupNombre = null;
+	private String chaine = null;
+	private Integer nombre  = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -24,9 +24,9 @@ public class MainActivity extends Activity
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		((TextView) findViewById(R.id.textView2)).setText("Quelle est votre mise totale?");
-		
+
 		buttonRecupNombre = (Button) findViewById(R.id.button1);
 		textRecupNombre = (EditText) findViewById(R.id.editText1);
 
@@ -37,20 +37,24 @@ public class MainActivity extends Activity
 			public void onClick(View v)
 			{
 				chaine = textRecupNombre.getText().toString();
-				nombre = Integer.parseInt(chaine);
+				if (chaine.trim().length() != 0)
+				{
+					nombre = Integer.parseInt(chaine);
 
-				// on affiche le nombre dans une petite pop-up qui s'affiche quelques secondes en bas d'ecran
-				Toast.makeText(MainActivity.this, "Le nombre = " + chaine + " !", Toast.LENGTH_LONG).show();
-
-				// affichage du nombre dans notre textView
-				if (nombre < 1000){
-					((TextView) findViewById(R.id.textView1)).setText("Mais tu est pauvre! Tu n'as que " + chaine + " euros !");
-				}
-				else {
-					((TextView) findViewById(R.id.textView1)).setText("Tu iras loins! Mais essaie de ne pas perdre tes " + chaine + " euros !");
+					// affichage du nombre dans notre textView
+					if (nombre < 1000)
+					{
+						((TextView) findViewById(R.id.textView1)).setText("Mais tu est pauvre! Tu n'as que " + chaine + " euros !");
+					} else
+					{
+						((TextView) findViewById(R.id.textView1)).setText("Tu iras loins! Mais essaie de ne pas perdre tes " + chaine + " euros !");
+					}
+				}else{
+					
+					// on affiche une pop-up pour dire qu'il faut forcement remplir la zone
+					Toast.makeText(MainActivity.this, "Il faut remplir le champ avant de valider", Toast.LENGTH_LONG).show();
 				}
 			}
-
 		});
 	}
 
